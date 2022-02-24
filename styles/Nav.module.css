@@ -1,0 +1,32 @@
+.navbar {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: Helvetica;
+    font-weight: 300;
+    top: 0;
+    left: 0;
+    background: #FFF;
+    z-index: 9999;
+    width: 100%;
+    padding: 3px;
+    -webkit-box-shadow: 0px 1px 5px 0px #777;
+    -moz-box-shadow: 0px 1px 5px 0px #777;
+    box-shadow: 0px 1px 5px 0px #777;
+    transition: 200ms;
+}
+
+.navbar__title {
+    margin-right: auto;
+    font-size: 150%;
+    padding: 12px 16px;
+    color: #0070f3;
+}
+
+.navbar__item {
+    padding: 16px 16px;
+    cursor: pointer;
+    vertical-align: middle;
+    color: #0070f3;
+}
