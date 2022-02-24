@@ -2,8 +2,7 @@
     position: fixed;
     display: flex;
     align-items: center;
-    color: white;
-    font-family: Helvetica;
+    font-family: Helvetica, serif;
     font-weight: 300;
     top: 0;
     left: 0;

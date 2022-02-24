@@ -6,7 +6,7 @@ const Nav = () => {
         <nav className={navStyles.navbar}>
             <div className={navStyles.navbar__title}><Link href='/'>Mini News</Link></div>
             <div className={navStyles.navbar__item}><Link href='/about'>About</Link></div>
-            <div className={navStyles.navbar__item}><Link href='#'>Search</Link></div>
+            <input  placeholder="Search..." />
         </nav>
     )
 }

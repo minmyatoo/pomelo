@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import Link from 'next/link'
-import { Button } from '@nextui-org/react';
+import {Button} from '@nextui-org/react';
 import ButtonBack from "../../../components/ButtonBack";
 
 const article = ({article}) => {
@@ -24,7 +24,7 @@ export const getServerSideProps = async (context) => {
     const article = await res.json();
 
     return {
-        props:{
+        props: {
             article
         }
     }

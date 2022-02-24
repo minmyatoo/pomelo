@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-content: center;
+  height: 7vh;
 }
 
 .main {

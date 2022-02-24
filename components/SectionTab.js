@@ -1,6 +1,8 @@
-import Link from 'next/link'
-import articleStyle from '../styles/Article.module.css'
-import {Card, Col, Grid, Text} from "@nextui-org/react";
+import Nav from "./Nav";
+import styles from '../styles/SectionTab.module.css'
+import {Container, Grid, Row, Col, Card, Text} from '@nextui-org/react';
+import Head from "next/head";
+import ArticleItem from "./ArticleItem";
 
 const NewsItem = ({url, title, description}) => {
     return (
@@ -32,23 +34,24 @@ const NewsItem = ({url, title, description}) => {
 
     );
 }
-const ArticleItem = ({article}) => {
-    console.log(article)
+
+
+const SectionTab = ({articles, sectionText}) => {//{children}
+    console.log(articles)
     return (
         <>
-            <Grid xs={6} sm={4}>
-                <Link href="/article/[id]" as={`/article/${article.id}`}>
-                    {/*dd.results[0].media[0]['media-metadata'][1]*/}
-                    <NewsItem url={''} title={article.title} description={article.abstract}/>
-                </Link>
-            </Grid>
-        </>
+            <h1 className={styles.head__text}>{sectionText}</h1>
+            <Grid.Container gap={2} justify="center">
+                <Grid xs={6}>
 
+                    <NewsItem url="https://nextui.org/images/card-example-4.jpeg" title="Google"
+                              description="thisistest"/>
+                </Grid>
+            </Grid.Container>
+        </>
     )
 }
-export default ArticleItem
 
-// <a className={articleStyle.card} >
-//     <h3>{article.title} &rarr;</h3>
-// <p>{article.body} &rarr;</p>
-// </a>
+
+export default SectionTab
+
