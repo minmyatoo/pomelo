@@ -1,12 +1,11 @@
 import Link from 'next/link'
-import articleStyle from '../styles/Article.module.css'
 import {Card, Col, Grid, Text} from "@nextui-org/react";
 
 const NewsItem = ({url, title, description}) => {
     return (
         <>
             <Card cover>
-                <Card.Header css={{position: 'absolute', zIndex: 1, top: 5}}>
+                <Card.Header css={{position: 'absolute', zIndex: 1, top: 5, left: 5}}>
                     <Col>
                         <Text
                             size={12}
@@ -18,6 +17,9 @@ const NewsItem = ({url, title, description}) => {
                         </Text>
                         <Text h4 color="white">
                             {title}
+                        </Text>
+                        <Text h5 color="white">
+                            {description}
                         </Text>
                     </Col>
                 </Card.Header>
@@ -33,21 +35,19 @@ const NewsItem = ({url, title, description}) => {
     );
 }
 const ArticleItem = ({article}) => {
-    console.log(article)
+    //console.log(article)
     return (
         <>
-            <Grid xs={6} sm={4}>
-                <Link href="/article/[id]" as={`/article/${article.id}`}>
-                    {/*dd.results[0].media[0]['media-metadata'][1]*/}
-                    <NewsItem url={''} title={article.title} description={article.abstract}/>
-                </Link>
-            </Grid>
+            <Link href="/article/[id]" as={`/article/${article.id}`}>
+                <NewsItem url='https://nextui.org/images/card-example-3.jpeg' title={article.title} description={article.abstract}/>
+            </Link>
         </>
 
     )
 }
 export default ArticleItem
-
+{/*dd.results[0].media[0]['media-metadata'][1]*/
+}
 // <a className={articleStyle.card} >
 //     <h3>{article.title} &rarr;</h3>
 // <p>{article.body} &rarr;</p>
