@@ -7,37 +7,32 @@ import SectionTab from "../components/SectionTab";
 import {Container, Grid, Row, Col, Card, Text} from '@nextui-org/react';
 import ArticleItem from "../components/ArticleItem";
 
-export default function Home({articles}) {
+export default function Home({articles, articles1}) {
 
     return (
         <>
             <Container gap={0}>
-            <h1 className={styles.head__text}>Most Viewed by Section 👋</h1>
-            <ArticleList articles={articles.results}/>
-            <hr/>
+                <h1 className={styles.head__text}>Trending</h1>
+                <hr/>
+                <h3 className={styles.head__text}>Most Popular</h3>
+                <ArticleList articles={articles.results}/>
+                <hr/>
+                <h3 className={styles.head__text}>Most Popular</h3>
+                <ArticleList articles={articles1.results}/>
+                <hr/>
             </Container>
         </>
     )
 }
-/*<h1 className={styles.head__text}>Most Viewed by Time Period 👋</h1>
-            <ArticleList articles={articles.results}/>*/
-// export const getStaticProps = async () => {
-//     const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=2`)
-//     const articles = await res.json();
-//
-//     return {
-//         props: {
-//             articles
-//         }
-//     }
-// }
-
 export const getStaticProps = async () => {
     const res = await fetch(`https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?&api-key=2x9Od8FiJUKXnu8q6j5d1nLoYs9tX3Zo`)
+    const res1 = await fetch(`https://api.nytimes.com/svc/mostpopular/v2/viewed/7.json?&api-key=2x9Od8FiJUKXnu8q6j5d1nLoYs9tX3Zo`)
     const articles = await res.json();
+    const articles1 = await res1.json();
     return {
         props: {
-            articles
+            articles,
+            articles1,
         }
     }
 }
