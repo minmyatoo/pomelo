@@ -1,38 +1,85 @@
 import Head from "next/head";
+import Meta from "../components/Meta";
+import axios from "axios";
+import React, {useEffect, useState} from "react";
 
-const about = () =>{
+const about = () => {
+
+    const [APIData, setAPIData] = useState([])
+    const [filteredResults, setFilteredResults] = useState([]);
+    let [searchInput, setSearchInput] = useState('');
+    const getArticle = () => {
+        axios
+            .get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&q=${searchInput}&api-key=2x9Od8FiJUKXnu8q6j5d1nLoYs9tX3Zo`)
+            .then(response => {
+                let results;
+                console.log('response', response);
+                results = response.data.response.docs;
+                if (response.data.response.docs.length === 0) {
+                    results = [
+                        {headline: {main: "No Results"}, byline: {original: ""}}
+                    ];
+                }
+                setAPIData(response.data.response.docs);
+            });
+    };
+
+    const clearForm = () => {
+        setSearchInput('');
+        setFilteredResults([]);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            handleChange(e.target.value);
+            clearForm();
+        }
+    };
+
+    const handleChange = (term) => {
+        let newInput = term;
+        if (newInput) {
+            searchInput = newInput;
+            getArticle();
+        }
+    };
+
+    const handleOptionChange = (e) => {
+        // let type;
+        // if (e.target.innerText === "Articles" || e.target.value === "articles") {
+        //     specialtyURL = "search/v2/articlesearch.json?sort=newest&q=";
+        // }
+        clearForm();
+    };
+    console.log(searchInput);
+    console.log('API: ', APIData);
     return (
         <div>
-            <Head>
-                <title> About</title>
-                <meta name='mike' content='web' />
-            </Head>
+            <Meta title="About"/>
             <section>
-                <h2>Layout Example (About)</h2>
+                <h2>About</h2>
                 <p>
-                    This example adds a property <code>getLayout</code> to your page,
-                    allowing you to return a React component for the layout. This allows you
-                    to define the layout on a per-page basis. Since we're returning a
-                    function, we can have complex nested layouts if desired.
-                </p>
-                <p>
-                    When navigating between pages, we want to persist page state (input
-                    values, scroll position, etc.) for a Single-Page Application (SPA)
-                    experience.
-                </p>
-                <p>
-                    This layout pattern will allow for state persistence because the React
-                    component tree is persisted between page transitions. To preserve state,
-                    we need to prevent the React component tree from being discarded between
-                    page transitions.
-                </p>
-                <h3>Try It Out</h3>
-                <p>
-                    To visualize this, try tying in the search input in the{' '}
-                    <code>Sidebar</code> and then changing routes. You'll notice the input
-                    state is persisted.
+                    This is about
                 </p>
             </section>
+            <section>
+                <div>
+                    {searchInput}
+                </div>
+                <input type="text" placeholder="search" onKeyPress={handleKeyPress}
+                />
+                <div>
+                    <ul>
+                        {APIData.map((item) => {
+                            return (
+                                <li key={item._id}>{item.abstract}</li> || 'Loading'
+                            );
+                        })}
+
+                    </ul>
+                </div>
+            </section>
+
         </div>
     )
 }
