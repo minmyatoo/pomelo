@@ -9,9 +9,7 @@ const Layout = ({children}) => {
             <Meta/>
             <Nav/>
             <Container fluid>
-                <main className={styles.main}>
-                    {children}
-                </main>
+                {children}
             </Container>
         </>
     )

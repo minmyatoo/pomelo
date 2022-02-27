@@ -1,33 +1,72 @@
 import Link from 'next/link'
 import navStyles from '../styles/Nav.module.css'
-import {Card, Col, Grid, Text, Row, Button, Divider, Modal, Input} from "@nextui-org/react";
-// Import the FontAwesomeIcon component
+import React, {useState} from "react";
+import axios from "axios";
+import {Card, Col, Grid, Text, Row, Button, Divider, Modal, Input, useModal} from "@nextui-org/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-// import the icons you need
 import {
     faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import {useModal} from "@nextui-org/react";
+import {SEARCH_ENDPOINT, NYTAPI, NEWS_IMG_URL} from "../config";
+
 
 const Nav = () => {
-    const { setVisible, bindings } = useModal();
+    const {setVisible, bindings} = useModal();
+    const [APIData, setAPIData] = useState([])
+    const [filteredResults, setFilteredResults] = useState([]);
+    let [searchInput, setSearchInput] = useState('');
+    const getArticle = () => {
+        axios
+            .get(`${SEARCH_ENDPOINT}?sort=newest&q=${searchInput}&api-key=${NYTAPI}`)
+            .then(response => {
+                let results;
+                console.log('response', response);
+                results = response.data.response.docs;
+                if (response.data.response.docs.length === 0) {
+                    setAPIData([]);
+                } else {
+                    setAPIData(response.data.response.docs);
+                }
 
+            });
+    };
+
+    const clearForm = () => {
+        setSearchInput('');
+        setFilteredResults([]);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            handleChange(e.target.value.toLowerCase());
+
+        }
+    };
+
+    const handleChange = (term) => {
+        let newInput = term;
+        if (newInput) {
+            searchInput = newInput;
+            getArticle();
+        }
+    };
+
+    const handleOptionChange = (e) => {
+        clearForm();
+    };
+    console.log(searchInput);
     return (
         <>
-            <nav className={navStyles.navbar}>
+            <div className={navStyles.navbar}>
                 <div className={navStyles.navbar__title}><Link href='/'>NYT News</Link></div>
-
-                {/*<input type="text" className={navStyles.navbar__search} placeholder="Search..."/>*/}
-                <div align='center'>
+                <div className={navStyles.navbar__item}>
                     <FontAwesomeIcon
                         onClick={() => setVisible(true)}
                         icon={faSearch}
                         style={{fontSize: 25, color: "red"}}
                     />
                 </div>
-                <div className={navStyles.navbar__item}><Link href='/about'>About</Link></div>
-                <div className={navStyles.navbar__item}><Link href='/movie'>Movie</Link></div>
-            </nav>
+            </div>
 
             <Modal
                 scroll
@@ -39,27 +78,55 @@ const Nav = () => {
             >
                 <Modal.Header>
                     <Text id="modal-title" size={18}>
-                        Search
+                        NYT News Search
                     </Text>
                 </Modal.Header>
                 <Modal.Body>
-                    <Grid.Container gap={4}>
-                        <Grid>
+                    <Input label="Search" type="search" size="xl" placeholder="Type search News terms and Please Enter"
+                           onKeyPress={handleKeyPress}/>
+                    <Divider/>
+                    <Text size={18}>
+                        Search result : {APIData.length}
+                    </Text>
+                    <Grid.Container gap={2} justify="center">
+                        {APIData.length > 0 ? APIData.map((item, index) => {
+                                return (
+                                    <>
+                                        <Grid xs={3} key={item.uri}>
+                                            <Card bordered css={{mw: "330px"}}>
+                                                <Text h4>{item.abstract}</Text>
 
-                            <Row>
-                                <Input label="Search" type="search" />
-                            </Row>
-                            <Row>
-                                <Button flat auto color="error" onClick={() => setVisible(false)}>
-                                    Search
-                                </Button>
-                            </Row>
-                        </Grid>
+                                                {item.multimedia.length > 1 &&
+                                                <Card.Image
+                                                    objectFit="cover"
+                                                    src={`${NEWS_IMG_URL}` + item.multimedia[0].url}
+                                                    width='100%'
+                                                    height={140}
+                                                    alt={item.title}
+                                                />
+                                                }
 
+                                                <Text size={12}>{item.lead_paragraph}</Text>
+                                                <Card.Footer justify="flex-start">
+                                                    <Row wrap='wrap' justify="space-between">
+                                                        <Text b>
+                                                            {item.section_name}
+                                                        </Text>
+                                                        <Link color="primary" target="_blank" href={item.web_url}>
+                                                            Visit full articles
+                                                        </Link>
+                                                    </Row>
+                                                </Card.Footer>
+                                            </Card>
+                                        </Grid>
+                                    </>
+                                );
+
+                            }) :
+                            ' '
+                        }
                     </Grid.Container>
-                    {/*<Text  id="modal-description">*/}
-                    {/*    <Input label="Search News..." placeholder="search news keywords" />*/}
-                    {/*</Text>*/}
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button flat auto color="error" onClick={() => setVisible(false)}>

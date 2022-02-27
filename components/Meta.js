@@ -11,7 +11,7 @@ const Meta = ({title,keywords,description}) =>{
     )
 }
 Meta.defaultProps = {
-    title:'Mini News',
+    title:'NYT News',
     keywords:'Pomelo code lab',
     description:'NYT News API',
 }
