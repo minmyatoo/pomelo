@@ -15,7 +15,7 @@ const article = ({article}) => {
             <Spacer y={1}/>
             <Container fluid>
                 <Row justify="center" align="center">
-                    <Text h3 color="black" css={{p: 2, m: 4}}>
+                    <Text h3 color="black" css={{paddingTop: 80, m: 4}}>
                         {article.response.docs[0].headline.main}
                     </Text>
                 </Row>
