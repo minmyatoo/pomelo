@@ -1,24 +1,34 @@
-# NYT News API Project
+#### This is a  NYT News API Next.js Project with NextUI.org UI. 
+# Getting Started
+<hr>
 
-## Install Node Packages
-``
-yarn install
-``
+## First, run the development server:
 
-## Run the development SERVER
+```bash
+yarn dev
+# or
+npm run dev
+```
 
-``
-yarn dev 
-``
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
 ## Build the project
 
 ``
 yarn build
 ``
-
 ## Run in production
 
-``
+```bash
+npm start
+# or
 yarn start
-``
+```
 
+## Testing the project
+#### please start the project then type : 
+```bash
+cypress open
+```
+
+<hr>

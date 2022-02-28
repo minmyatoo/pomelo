@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import {Button, Grid, Row} from '@nextui-org/react';
-
 const ButtonBack = ({name, url}) => {
     return (
         <>

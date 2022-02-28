@@ -1,7 +1,4 @@
-import Nav from "./Nav";
-import styles from '../styles/Layout.module.css'
-import {Container, Row, Col, Card, Text, Divider} from '@nextui-org/react';
-import Meta from "./Meta";
+import { Row, Col, Card, Text, Divider} from '@nextui-org/react';
 import Link from "next/link";
 
 const NewsCard = ({item}) => {
@@ -61,7 +58,7 @@ const NewsCard = ({item}) => {
                     </Card.Body>
                     <Divider/>
                     <Card.Footer justify="center">
-                        <Row justify="flex-end">
+                        <Row justify="space-between">
                             <Text>
                                 #{item.section}
                             </Text>

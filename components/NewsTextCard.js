@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import {Button, Card, Col, Divider, Grid, Row, Text} from "@nextui-org/react";
+import {Button, Card, Col, Divider, Row, Text} from "@nextui-org/react";
 const NewsTextCard = ({item}) => {
     //console.log(article)
     return (

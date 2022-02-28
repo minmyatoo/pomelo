@@ -2,7 +2,7 @@ import Link from 'next/link'
 import navStyles from '../styles/Nav.module.css'
 import React, {useState} from "react";
 import axios from "axios";
-import {Card, Col, Grid, Text, Row, Button, Divider, Modal, Input, useModal} from "@nextui-org/react";
+import {Card, Grid, Text, Row, Button, Divider, Modal, Input, useModal} from "@nextui-org/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faSearch,
@@ -13,14 +13,11 @@ import {SEARCH_ENDPOINT, NYTAPI, NEWS_IMG_URL} from "../config";
 const Nav = () => {
     const {setVisible, bindings} = useModal();
     const [APIData, setAPIData] = useState([])
-    const [filteredResults, setFilteredResults] = useState([]);
     let [searchInput, setSearchInput] = useState('');
     const getArticle = () => {
         axios
             .get(`${SEARCH_ENDPOINT}?sort=newest&q=${searchInput}&api-key=${NYTAPI}`)
             .then(response => {
-                let results;
-                results = response.data.response.docs;
                 if (response.data.response.docs.length === 0) {
                     setAPIData([]);
                 } else {
@@ -30,10 +27,6 @@ const Nav = () => {
             });
     };
 
-    const clearForm = () => {
-        setSearchInput('');
-        setFilteredResults([]);
-    };
 
     const handleKeyPress = (e) => {
         if (e.key === "Enter") {
@@ -50,9 +43,6 @@ const Nav = () => {
         }
     };
 
-    const handleOptionChange = (e) => {
-        clearForm();
-    };
     return (
         <>
             <div className={navStyles.navbar}>
@@ -87,7 +77,7 @@ const Nav = () => {
                         Search result : {APIData.length}
                     </Text>
                     <Grid.Container gap={2} justify="center">
-                        {APIData.length > 0 ? APIData.map((item, index) => {
+                        {APIData.length > 0 ? APIData.map((item) => {
                                 return (
                                     <>
                                         <Grid xs={3} key={item.uri}>

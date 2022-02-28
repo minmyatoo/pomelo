@@ -2,7 +2,7 @@ import {useRouter} from "next/router";
 import ButtonBack from "../../../components/ButtonBack";
 import Meta from "../../../components/Meta";
 import React from "react";
-import {Container, Row, Col, Card, Text, Spacer} from '@nextui-org/react';
+import {Container, Row, Col, Text, Spacer} from '@nextui-org/react';
 import {SEARCH_ENDPOINT, NYTAPI} from "../../../config";
 
 const article = ({article}) => {
