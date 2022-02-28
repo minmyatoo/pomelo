@@ -20,7 +20,6 @@ const Nav = () => {
             .get(`${SEARCH_ENDPOINT}?sort=newest&q=${searchInput}&api-key=${NYTAPI}`)
             .then(response => {
                 let results;
-                console.log('response', response);
                 results = response.data.response.docs;
                 if (response.data.response.docs.length === 0) {
                     setAPIData([]);
@@ -54,7 +53,6 @@ const Nav = () => {
     const handleOptionChange = (e) => {
         clearForm();
     };
-    console.log(searchInput);
     return (
         <>
             <div className={navStyles.navbar}>

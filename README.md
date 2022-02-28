@@ -10,6 +10,11 @@ yarn install
 ``
 yarn dev 
 ``
+## Build the project
+
+``
+yarn build
+``
 
 ## Run in production
 

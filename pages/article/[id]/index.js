@@ -3,8 +3,7 @@ import ButtonBack from "../../../components/ButtonBack";
 import Meta from "../../../components/Meta";
 import React from "react";
 import {Container, Row, Col, Card, Text, Spacer} from '@nextui-org/react';
-import {SEARCH_ENDPOINT,NYTAPI} from "../../../config";
-
+import {SEARCH_ENDPOINT, NYTAPI} from "../../../config";
 
 const article = ({article}) => {
     //const router = useRouter();
@@ -41,9 +40,6 @@ const article = ({article}) => {
 
     )
 }
-const encode = (uri) => {
-    return encodeURIComponent(`"_id": "nyt://article/${uri}"`)
-}
 export const getServerSideProps = async (context) => {
     var queryURL = `${SEARCH_ENDPOINT}?fq=_id%3A%22nyt%3A%2F%2Farticle%2F${context.params.id}%22&api-key=${NYTAPI}`;
     const res = await fetch(queryURL)
@@ -51,7 +47,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
-            article
+            article,
         }
     }
 }
