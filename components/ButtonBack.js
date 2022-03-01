@@ -5,8 +5,8 @@ const ButtonBack = ({name, url}) => {
         <>
             <Grid.Container gap={2}>
                 <Row justify="space-between">
-                    <Link href='/'><Button>{name}</Button></Link>
-                    <Link href={url}><Button shadow color="gradient" auto>Read full article</Button></Link>
+                    <Link href='/'><Button id='back'>{name}</Button></Link>
+                    <Link href={url}><Button id='fullarticle' shadow color="gradient" auto>Read full article</Button></Link>
                 </Row>
             </Grid.Container>
 

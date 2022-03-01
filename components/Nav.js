@@ -46,8 +46,8 @@ const Nav = () => {
     return (
         <>
             <div className={navStyles.navbar}>
-                <div className={navStyles.navbar__title}><Link href='/'>NYT News</Link></div>
-                <div className={navStyles.navbar__item}>
+                <div id='title' className={navStyles.navbar__title}><Link href='/'>NYT News</Link></div>
+                <div className={navStyles.navbar__item} id='search'>
                     <FontAwesomeIcon
                         onClick={() => setVisible(true)}
                         icon={faSearch}
@@ -70,7 +70,7 @@ const Nav = () => {
                     </Text>
                 </Modal.Header>
                 <Modal.Body>
-                    <Input label="Search" type="search" size="xl" placeholder="Type search News terms and Please Enter"
+                    <Input label="Search" type="search" id="newssearch" size="xl" placeholder="Type search News terms and Please Enter"
                            onKeyPress={handleKeyPress}/>
                     <Divider/>
                     <Text size={18}>
@@ -117,7 +117,7 @@ const Nav = () => {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button flat auto color="error" onClick={() => setVisible(false)}>
+                    <Button id="close" flat auto color="error" onClick={() => setVisible(false)}>
                         Close
                     </Button>
                 </Modal.Footer>

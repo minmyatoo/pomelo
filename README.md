@@ -14,9 +14,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Build the project
 
-``
+```bash
 yarn build
-``
+# or
+npm build
+```
 ## Run in production
 
 ```bash
